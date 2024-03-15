@@ -1,6 +1,8 @@
-﻿namespace NameApp.Domain.Common
+﻿using NameApp.Infrastructure.EventDispatcher;
+
+namespace NameApp.Domain.Common
 {
-    public abstract class Event
+    public abstract class DomainEvent : IEvent
     {
     }
 }

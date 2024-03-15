@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using NameApp.Application.User.Dto;
+using System.ComponentModel.DataAnnotations;
 
 namespace NameApp.Presentation.Web.Schemas
 {
@@ -9,14 +10,15 @@ namespace NameApp.Presentation.Web.Schemas
         [Required]
         public string Name { get; set; } = null!;
         [Required]
-        public string HashedPassword { get; set; } = null!;
-        [Required]
         public string EmailAddress { get; set; } = null!;
-        //public UserRoles Role { get; set; } = null!;
 
-        public static UserScheme FromDTO()
+        public static UserScheme FromDTO(UserDto dto)
         {
-
+            return new UserScheme {
+                Id = dto.Id,
+                Name = dto.Name, 
+                EmailAddress = dto.EmailAddress 
+            };
         }
     }
 

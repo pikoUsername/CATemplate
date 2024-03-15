@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NameApp.Application.User.Dto;
 using NameApp.Presentation.Web.Schemas;
 using Swashbuckle.AspNetCore.Annotations;
-using System.ComponentModel;
 
 namespace NameApp.Presentation.Web.Controllers
 {
@@ -20,10 +20,11 @@ namespace NameApp.Presentation.Web.Controllers
         [HttpPost("register")]
         public async Task<UserScheme> Register()
         {
+            RegisterDto dto = new RegisterDto();
             var result = await _ioContainer
                 .UserService()
-                .Register()
-                .Execute();
+                .RegisterInteractor()
+                .Execute(dto);
             return UserScheme.FromDTO(result); 
         }
     }

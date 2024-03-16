@@ -21,7 +21,7 @@ namespace NameApp.Infrastructure
 
             services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
 
-            services.AddScoped<ApplicationDbContextInitialiser>();
+            //services.AddScoped<ApplicationDbContextInitialiser>();
 
             return services;
         }

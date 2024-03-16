@@ -1,7 +1,9 @@
-﻿namespace NameApp.Application.Common.IoC
+﻿using NameApp.Application.User.Interfaces;
+
+namespace NameApp.Application.Common.IoC
 {
-    public abstract class IIoContainer
+    public interface IIoContainer
     {
-        public abstract UserService UserService();
+        public IUserService User();
     }
 }

@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using NameApp.Domain.User.Entities;
+using NameApp.Infrastructure.Data;
 using System.Text;
 using System.Text.Json;
 
@@ -12,7 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddDbContext<ApplicationContext>(options =>
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.EnableDetailedErrors(true);
     options.UseNpgsql(builder.Configuration["ConnectionString"]);

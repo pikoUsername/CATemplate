@@ -1,10 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NameApp.Application.Common.Interfaces;
+using NameApp.Domain.User.Entities;
+using NameApp.Infrastructure.Data.Configuration;
+using NameApp.Infrastructure.Data.Intercepters;
+using System.Reflection;
 
 namespace NameApp.Infrastructure.Data
 {
-    public class ApplicationContext : DbContext 
+    public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
-        public ApplicationContext(DbContextOptions options) : base(options) { }
+        public DbSet<UserEntity> Users { get; }
+
+        public ApplicationDbContext(DbContextOptions options) : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -12,6 +19,9 @@ namespace NameApp.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            // add here any amount of configurations 
+            builder.ApplyConfiguration(new UserConfiguration());
         }
+
     }
 }

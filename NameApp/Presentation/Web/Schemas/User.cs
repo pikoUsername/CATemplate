@@ -12,7 +12,7 @@ namespace NameApp.Presentation.Web.Schemas
         [Required]
         public string EmailAddress { get; set; } = null!;
 
-        public static UserScheme FromDTO(UserDto dto)
+        public static UserScheme FromUserDTO(UserDto dto)
         {
             return new UserScheme {
                 Id = dto.Id,

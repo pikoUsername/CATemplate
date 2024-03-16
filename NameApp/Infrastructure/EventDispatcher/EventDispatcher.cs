@@ -4,7 +4,7 @@ namespace NameApp.Infrastructure.EventDispatcher
 {
     public class EventDispatcher : IEventDispatcher
     {
-        private readonly Dictionary<Type, List<Delegate>> eventListeners = new Dictionary<Type, List<Delegate>>();
+        private readonly Dictionary<Type, List<Delegate>> eventListeners = new();
 
         public void RegisterEventSubscribers(Assembly assembly)
         {
@@ -15,13 +15,12 @@ namespace NameApp.Infrastructure.EventDispatcher
             foreach (var eventSubscriberType in eventSubscriberTypes)
             {
                 var eventSubscriber = Activator.CreateInstance(eventSubscriberType);
-                RegisterEventSubscriber((IEventSubscriber<>)eventSubscriber);
+                RegisterEventSubscriber((IEventSubscriber<IEvent>)eventSubscriber);
             }
         }
 
-        void RegisterEventSubscriber<TEventSubscriber, TEvent>(TEventSubscriber eventSubscriber)
-            where TEventSubscriber : IEventSubscriber<TEvent>
-            where TEvent : IEvent
+        public void RegisterEventSubscriber<TEventSubscriber>(TEventSubscriber eventSubscriber)
+            where TEventSubscriber : IEventSubscriber<IEvent>
         {
             var eventTypes = GetEventTypes(eventSubscriber.GetType());
 
@@ -29,7 +28,7 @@ namespace NameApp.Infrastructure.EventDispatcher
             {
                 if (!eventListeners.ContainsKey(eventType))
                 {
-                    eventListeners[eventType] = new List<Delegate>();
+                    eventListeners[eventType] = [];
                 }
 
                 var eventHandler = CreateEventHandlerDelegate(eventSubscriber, eventType);
@@ -42,7 +41,7 @@ namespace NameApp.Infrastructure.EventDispatcher
             Type eventType = typeof(TEvent);
             if (!eventListeners.ContainsKey(eventType))
             {
-                eventListeners[eventType] = new List<Delegate>();
+                eventListeners[eventType] = [];
             }
 
             eventListeners[eventType].Add(listener);

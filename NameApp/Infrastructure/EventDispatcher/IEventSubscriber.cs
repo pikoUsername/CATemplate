@@ -1,7 +1,7 @@
 ﻿namespace NameApp.Infrastructure.EventDispatcher
 {
-    public interface IEventSubscriber<TEvent> where TEvent : IEvent
+    public interface IEventSubscriber<TEvent> where TEvent : BaseEvent
     {
-        void HandleEvent(TEvent @event);
+        public void HandleEvent(TEvent @event);
     }
 }

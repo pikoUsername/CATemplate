@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NameApp.Application.Common.IoC;
 using NameApp.Application.User.Dto;
 using NameApp.Presentation.Web.Schemas;
 using Swashbuckle.AspNetCore.Annotations;
@@ -22,7 +23,7 @@ namespace NameApp.Presentation.Web.Controllers
         {
             RegisterDto dto = new RegisterDto();
             var result = await _ioContainer
-                .UserService()
+                .User()
                 .RegisterInteractor()
                 .Execute(dto);
             return UserScheme.FromUserDTO(result); 

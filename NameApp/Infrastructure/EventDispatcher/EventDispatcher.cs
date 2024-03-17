@@ -15,12 +15,12 @@ namespace NameApp.Infrastructure.EventDispatcher
             foreach (var eventSubscriberType in eventSubscriberTypes)
             {
                 var eventSubscriber = Activator.CreateInstance(eventSubscriberType);
-                RegisterEventSubscriber((IEventSubscriber<IEvent>)eventSubscriber);
+                RegisterEventSubscriber((IEventSubscriber<BaseEvent>)eventSubscriber);
             }
         }
 
         public void RegisterEventSubscriber<TEventSubscriber>(TEventSubscriber eventSubscriber)
-            where TEventSubscriber : IEventSubscriber<IEvent>
+            where TEventSubscriber : IEventSubscriber<BaseEvent>
         {
             var eventTypes = GetEventTypes(eventSubscriber.GetType());
 
@@ -36,7 +36,7 @@ namespace NameApp.Infrastructure.EventDispatcher
             }
         }
 
-        public void AddListener<TEvent>(Action<TEvent> listener) where TEvent : IEvent
+        public void AddListener<TEvent>(Action<TEvent> listener) where TEvent : BaseEvent
         {
             Type eventType = typeof(TEvent);
             if (!eventListeners.ContainsKey(eventType))
@@ -47,7 +47,7 @@ namespace NameApp.Infrastructure.EventDispatcher
             eventListeners[eventType].Add(listener);
         }
 
-        public void RemoveListener<TEvent>(Action<TEvent> listener) where TEvent : IEvent
+        public void RemoveListener<TEvent>(Action<TEvent> listener) where TEvent : BaseEvent
         {
             Type eventType = typeof(TEvent);
             if (eventListeners.ContainsKey(eventType))
@@ -56,7 +56,7 @@ namespace NameApp.Infrastructure.EventDispatcher
             }
         }
 
-        public void Dispatch<TEvent>(TEvent @event) where TEvent : IEvent
+        public void Dispatch<TEvent>(TEvent @event) where TEvent : BaseEvent
         {
             Type eventType = typeof(TEvent);
             if (eventListeners.ContainsKey(eventType))

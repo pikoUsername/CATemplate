@@ -2,7 +2,7 @@
 
 namespace NameApp.Domain.Common
 {
-    public abstract class DomainEvent : IEvent
+    public abstract class DomainEvent : BaseEvent
     {
     }
 }

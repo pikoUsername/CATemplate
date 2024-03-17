@@ -1,4 +1,6 @@
 ﻿using NameApp.Application.Common.IoC;
+using NameApp.Application.User.EventHandlers;
+using NameApp.Domain.User.Events;
 using NameApp.Infrastructure.EventDispatcher;
 using System.Reflection;
 
@@ -10,8 +12,9 @@ namespace NameApp.Application
         {
             var eventDispatcher = new EventDispatcher();
 
-            eventDispatcher.RegisterEventSubscribers(Assembly.GetExecutingAssembly()); 
+            eventDispatcher.RegisterEventSubscribers(Assembly.GetExecutingAssembly());
 
+            services.AddScoped<IEventSubscriber<UserCreated>, UserCreatedSubsciber>();
             services.AddScoped<IIoContainer, IoContainer>();
             services.AddSingleton<IEventDispatcher, EventDispatcher>(x => { return eventDispatcher; });
 

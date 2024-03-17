@@ -1,4 +1,5 @@
-﻿using NameApp.Domain.Common;
+﻿using NameApp.Domain.AccessService.Entities;
+using NameApp.Domain.Common;
 using System.ComponentModel.DataAnnotations;
 
 namespace NameApp.Domain.User.Entities
@@ -11,7 +12,7 @@ namespace NameApp.Domain.User.Entities
         public string HashedPassword { get; set;} = null!;
         [Required] 
         [EmailAddress(ErrorMessage = "Email address is not correct")]
-        public string EmailAddress { get; set; } = null!;
+        public string Email { get; set; } = null!;
         public PermissionEntity? Permission { get; set; } = null!; 
     }
 }

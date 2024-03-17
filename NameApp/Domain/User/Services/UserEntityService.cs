@@ -1,4 +1,5 @@
-﻿using NameApp.Domain.User.Entities;
+﻿using NameApp.Domain.AccessService.Entities;
+using NameApp.Domain.User.Entities;
 using NameApp.Domain.User.Events;
 using NameApp.Infrastructure.EventDispatcher;
 
@@ -20,13 +21,15 @@ namespace NameApp.Domain.User.Services
         public UserEntity Create(
             string UserName, 
             string email, 
-            string password
+            string password, 
+            PermissionEntity? permission 
         )
         {
             var user = new UserEntity()
             {
-                EmailAddress = email, 
+                Email = email, 
                 UserName = UserName,
+                Permission = permission
             };
             var hashedPassword = PasswordService.HashPassword(user, password);
 

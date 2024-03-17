@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NameApp.Application.Common.Interfaces;
+using NameApp.Domain.AccessService.Entities;
 using NameApp.Domain.User.Entities;
 using NameApp.Infrastructure.Data.Configuration;
 using NameApp.Infrastructure.Data.Intercepters;
@@ -10,6 +11,8 @@ namespace NameApp.Infrastructure.Data
     public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
         public DbSet<UserEntity> Users { get; } = null!; 
+
+        public DbSet<PermissionEntity> Permissions {  get; } = null!; 
 
         public ApplicationDbContext(DbContextOptions options) : base(options) { }
 

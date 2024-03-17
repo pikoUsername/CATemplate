@@ -1,7 +1,5 @@
-﻿using NameApp.Application.User.EventHandlers;
-using NameApp.Domain.User.Events;
+﻿using NameApp.Domain.AccessService.Services;
 using NameApp.Domain.User.Services;
-using NameApp.Infrastructure.EventDispatcher;
 
 namespace NameApp.Domain
 {
@@ -9,10 +7,9 @@ namespace NameApp.Domain
     {
         public static IServiceCollection AddDomainServices(this IServiceCollection services)
         {
-            services.AddScoped<IEventSubscriber<UserCreated>, UserCreatedSubsciber>();
-
             services.AddScoped<PasswordService, PasswordService>();
             services.AddScoped<UserEntityService, UserEntityService>();
+            services.AddScoped<PermissionEntityService, PermissionEntityService>();
 
             return services; 
         }

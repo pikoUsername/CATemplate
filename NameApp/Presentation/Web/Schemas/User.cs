@@ -7,18 +7,18 @@ namespace NameApp.Presentation.Web.Schemas
     public class UserScheme
     {
         [Required]
-        Guid Id { get; set; }
+        public Guid Id { get; set; }
         [Required]
         public string Name { get; set; } = null!;
         [Required]
-        public string EmailAddress { get; set; } = null!;
+        public string Email { get; set; } = null!;
 
         public static UserScheme FromEntity(UserEntity entity)
         {
             return new UserScheme {
                 Id = entity.Id,
                 Name = entity.UserName, 
-                EmailAddress = entity.EmailAddress 
+                Email = entity.Email 
             };
         }
     }
@@ -29,6 +29,6 @@ namespace NameApp.Presentation.Web.Schemas
         [Required]
         public string Password { get; set; } = null!;
         [Required]
-        public string EmailAddress { get; set; } = null!;
+        public string Email { get; set; } = null!;
     }
 }

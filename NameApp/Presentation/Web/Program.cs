@@ -5,7 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using NameApp.Application;
 using NameApp.Domain.User.Entities;
+using NameApp.Infrastructure;
 using NameApp.Infrastructure.Data;
 using System.Text;
 using System.Text.Json;
@@ -55,6 +57,10 @@ builder.Services.AddSwaggerGen(options =>
         }
     });
 });
+
+builder.Services.AddHealthChecks();
+builder.Services.AddApplicationServices();
+builder.Services.AddInfrastructureServices(builder.Configuration); 
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

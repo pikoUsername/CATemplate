@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NameApp.Application;
+using NameApp.Domain;
 using NameApp.Domain.User.Entities;
 using NameApp.Infrastructure;
 using NameApp.Infrastructure.Data;
@@ -60,6 +61,7 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddHealthChecks();
 builder.Services.AddApplicationServices();
+builder.Services.AddDomainServices(); 
 builder.Services.AddInfrastructureServices(builder.Configuration); 
 builder.Services.AddAuthentication(options =>
 {
@@ -67,6 +69,10 @@ builder.Services.AddAuthentication(options =>
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 }).AddJwtBearer(options =>
 {
+    var secretKey = builder.Configuration["Jwt:SecretKey"];
+
+    Guard.Against.Null(secretKey, message: "Jwt:SecretKey does not exists"); 
+
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuer = true,
@@ -75,7 +81,7 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuerSigningKey = true,
         ValidIssuer = builder.Configuration["Jwt:Issuer"],
         ValidAudience = builder.Configuration["Jwt:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecretKey"]))
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
     };
 });
 builder.Services.AddScoped<IPasswordHasher<UserEntity>, PasswordHasher<UserEntity>>();

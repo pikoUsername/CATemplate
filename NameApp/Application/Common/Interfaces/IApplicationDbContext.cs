@@ -7,6 +7,6 @@ namespace NameApp.Application.Common.Interfaces
     {
         DbSet<UserEntity> Users { get; }
 
-        Task<int> SaveChangesAsync(CancellationToken cancellationToken);
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }

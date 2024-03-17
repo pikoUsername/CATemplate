@@ -9,7 +9,7 @@ namespace NameApp.Infrastructure.Data
 {
     public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
-        public DbSet<UserEntity> Users { get; }
+        public DbSet<UserEntity> Users { get; } = null!; 
 
         public ApplicationDbContext(DbContextOptions options) : base(options) { }
 

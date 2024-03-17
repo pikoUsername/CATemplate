@@ -26,7 +26,7 @@ namespace NameApp.Presentation.Web.Controllers
                 .User()
                 .RegisterInteractor()
                 .Execute(dto);
-            return UserScheme.FromUserDTO(result); 
+            return UserScheme.FromEntity(result); 
         }
     }
 }

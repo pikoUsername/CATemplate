@@ -1,4 +1,5 @@
 ﻿using NameApp.Application.User.Dto;
+using NameApp.Domain.User.Entities;
 using System.ComponentModel.DataAnnotations;
 
 namespace NameApp.Presentation.Web.Schemas
@@ -12,12 +13,12 @@ namespace NameApp.Presentation.Web.Schemas
         [Required]
         public string EmailAddress { get; set; } = null!;
 
-        public static UserScheme FromUserDTO(UserDto dto)
+        public static UserScheme FromEntity(UserEntity entity)
         {
             return new UserScheme {
-                Id = dto.Id,
-                Name = dto.Name, 
-                EmailAddress = dto.EmailAddress 
+                Id = entity.Id,
+                Name = entity.UserName, 
+                EmailAddress = entity.EmailAddress 
             };
         }
     }

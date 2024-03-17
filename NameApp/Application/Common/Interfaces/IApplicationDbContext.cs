@@ -9,6 +9,7 @@ namespace NameApp.Application.Common.Interfaces
     {
         DbSet<UserEntity> Users { get; }
         DbSet<PermissionEntity> Permissions { get; }
+        DbSet<GroupEntity> Groups { get; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
         EntityEntry<TEntity> Update<TEntity>(TEntity entity) where TEntity : class; 

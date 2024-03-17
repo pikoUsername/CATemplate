@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NameApp.Application.Common.IoC;
+using NameApp.Application.User;
 using NameApp.Application.User.Dto;
+using NameApp.Application.User.Interfaces;
 using NameApp.Presentation.Web.Schemas;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -11,19 +12,18 @@ namespace NameApp.Presentation.Web.Controllers
     [ApiController]
     public class UserControllers
     {
-        public IIoContainer _ioContainer;
+        public IUserService UserService;
 
-        public UserControllers(IIoContainer container)
+        public UserControllers(IUserService userService)
         {
-            _ioContainer = container; 
+            UserService = userService; 
         }
 
         [HttpPost("register")]
         public async Task<UserScheme> Register()
         {
-            RegisterDto dto = new RegisterDto();
-            var result = await _ioContainer
-                .User()
+            CreateUserDto dto = new();
+            var result = await UserService
                 .RegisterInteractor()
                 .Execute(dto);
             return UserScheme.FromEntity(result); 

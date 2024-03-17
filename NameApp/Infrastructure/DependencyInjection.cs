@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using NameApp.Application.Common.Interfaces;
 using NameApp.Infrastructure.Data;
+using NameApp.Infrastructure.Data.Intercepters; 
 
 namespace NameApp.Infrastructure
 {

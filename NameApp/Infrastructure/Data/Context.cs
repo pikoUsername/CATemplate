@@ -3,14 +3,13 @@ using NameApp.Application.Common.Interfaces;
 using NameApp.Domain.AccessService.Entities;
 using NameApp.Domain.User.Entities;
 using NameApp.Infrastructure.Data.Configuration;
-using NameApp.Infrastructure.Data.Intercepters;
-using System.Reflection;
 
 namespace NameApp.Infrastructure.Data
 {
     public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
-        public DbSet<UserEntity> Users { get; } = null!; 
+        public DbSet<UserEntity> Users { get; } = null!;
+        public DbSet<GroupEntity> Groups { get; } = null!; 
 
         public DbSet<PermissionEntity> Permissions {  get; } = null!; 
 

@@ -2,7 +2,7 @@
 
 namespace NameApp.Application.User.Dto
 {
-    public class RegisterDto
+    public class CreateUserDto
     {
         [Required]
         public string UserName { get; set; } = null!;

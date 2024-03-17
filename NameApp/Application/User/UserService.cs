@@ -8,26 +8,26 @@ namespace NameApp.Application.User
 {
     public class UserService : IUserService
     {
-        private readonly IApplicationDbContext _context;
-        private readonly UserEntityService _serviceEntity;
-        private readonly PermissionEntityService _permissionService; 
+        private readonly IApplicationDbContext Context;
+        private readonly UserEntityService ServiceEntity;
+        private readonly PermissionEntityService PermissionService; 
 
         public UserService(
             IApplicationDbContext dbContext,
             UserEntityService userEntityService,
             PermissionEntityService permissionService
         ) {
-            _permissionService = permissionService; 
-            _serviceEntity = userEntityService;
-            _context = dbContext;
+            PermissionService = permissionService;
+            ServiceEntity = userEntityService;
+            Context = dbContext;
         }
 
         public RegisterInteractor RegisterInteractor()
         {
             return new RegisterInteractor(
-                dbContext: _context,
-                userEntityService: _serviceEntity, 
-                permissionService: _permissionService
+                dbContext: Context,
+                userEntityService: ServiceEntity, 
+                permissionService: PermissionService
             ); 
         }
     }

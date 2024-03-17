@@ -3,14 +3,13 @@ using NameApp.Application.Common.Interactors;
 using NameApp.Application.Common.Interfaces;
 using NameApp.Application.User.Dto;
 using NameApp.Application.User.Exceptions;
-using NameApp.Application.User.Interfaces;
 using NameApp.Domain.AccessService.Services;
 using NameApp.Domain.User.Entities;
 using NameApp.Domain.User.Services;
 
 namespace NameApp.Application.User.Interactors
 {
-    public class RegisterInteractor : BaseInteractor<RegisterDto, UserEntity>
+    public class RegisterInteractor : BaseInteractor<CreateUserDto, UserEntity>
     {
         private readonly IApplicationDbContext _context;
         private readonly UserEntityService _userService;
@@ -26,7 +25,7 @@ namespace NameApp.Application.User.Interactors
             _permissionService = permissionService;
         }
 
-        public async Task<UserEntity> Execute(RegisterDto dto)
+        public async Task<UserEntity> Execute(CreateUserDto dto)
         {
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Email == dto.EmailAddress); 
             if (user != null)

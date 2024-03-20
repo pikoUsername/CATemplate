@@ -1,4 +1,3 @@
-﻿using NameApp.Application.Common.IoC;
 using NameApp.Application.User;
 using NameApp.Application.User.EventHandlers;
 using NameApp.Application.User.Interfaces;
